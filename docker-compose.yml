@@ -1,0 +1,10 @@
+services:
+  campus_devops:
+    image: uzairmkhan78/campus_devops:latest
+    container_name: campus_devops
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
