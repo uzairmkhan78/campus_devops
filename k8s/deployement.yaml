@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: campus-app
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: campus-app
+
+  template:
+    metadata:
+      labels:
+        app: campus-app
+
+    spec:
+      containers:
+        - name: campus-app
+          image: uzairkhan78/campus_devops:latest
+
+          ports:
+            - containerPort: 5000
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
