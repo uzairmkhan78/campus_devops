@@ -50,7 +50,7 @@ jobs:
 
         env:
 
-          U: ${{ secrets.DOCKERHUB_USERNAME }}
+          U: ${{ secrets.DOCKERHUB_USE}
 
           T: ${{ secrets.DOCKERHUB_TOKEN }}
 
@@ -79,5 +79,14 @@ jobs:
       - name: Build and Push Image
 
         uses: docker/build-push-action@v6
+with:
 
-    
+          context: .
+
+          push: ${{ github.event_name == 'push' }}
+
+          tags: |
+
+            uzairkhan78/campus_devops:latest
+
+            uzairkhan78/campus_devops:${{ github.sha }}
