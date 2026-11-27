@@ -20,6 +20,8 @@ students = [
 
 
 
+
+
 @app.route("/")
 
 def home():
@@ -36,11 +38,15 @@ def home():
 
 
 
+
+
 @app.route("/students")
 
 def get_students():
 
     return jsonify(students)
+
+
 
 
 
@@ -72,8 +78,20 @@ def add_student():
 
     students.append(student)
 
+@app.route("/health")
+
+def health():
+
+    return jsonify({"status": "healthy"})
 
 
-    return jsonify({
 
-        "m
+
+
+if __name__ == "__main__":
+
+    app.run(host="0.0.0.0", port=5001)
+
+EOF
+
+  
