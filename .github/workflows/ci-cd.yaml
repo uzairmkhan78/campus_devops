@@ -1,3 +1,9 @@
+cd ~/campus_devops
+
+
+
+cat > .github/workflows/ci-cd.yaml <<'EOF'
+
 name: Campus DevOps CI-CD
 
 
@@ -42,26 +48,6 @@ jobs:
 
 
 
-      # TEMPORARY: remove this step once login works
-
-      - name: Check secrets present
-
-        if: github.event_name == 'push'
-
-        env:
-
-          U: ${{ secrets.DOCKERHUB_USE}
-
-          T: ${{ secrets.DOCKERHUB_TOKEN }}
-
-        run: |
-
-          echo "username length: ${#U}"
-
-          echo "token length: ${#T}"
-
-
-
       - name: Login to Docker Hub
 
         if: github.event_name == 'push'
@@ -79,7 +65,8 @@ jobs:
       - name: Build and Push Image
 
         uses: docker/build-push-action@v6
-with:
+
+        with:
 
           context: .
 
@@ -90,3 +77,4 @@ with:
             uzairkhan78/campus_devops:latest
 
             uzairkhan78/campus_devops:${{ github.sha }}
+
